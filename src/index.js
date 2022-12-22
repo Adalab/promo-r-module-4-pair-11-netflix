@@ -29,7 +29,9 @@ server.get('/movies/:movieId', (req, res) => {
 
 server.post('/login', (req, res) => {
   const userFinded = users.find((user) => {
-    if (req.body.email === user.email) {
+return req.body.email === user.email && req.body.password === user.password;
+  });
+    if (userFinded) {
       const responseSuccess = {
         success: true,
         userId: 'id_de_la_usuaria_encontrada',
@@ -43,7 +45,6 @@ server.post('/login', (req, res) => {
       res.json(responseFalse);
     }
   });
-});
 
 const staticServerPath = './src/public-react';
 server.use(express.static(staticServerPath));
