@@ -1,6 +1,4 @@
-{
-    "success": true,
-    "movies": [
+ [
       {
         "id": "1",
         "title": "Gambita de dama",
@@ -14,4 +12,4 @@
         "image": "//localhost:4000/friends.jpg"
       }
     ]
-  }
+  

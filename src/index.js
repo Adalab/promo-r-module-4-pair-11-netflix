@@ -7,7 +7,7 @@ const users = require('./data/users.json');
 const server = express();
 server.use(cors());
 server.use(express.json());
-
+server.set('view engine', 'ejs');
 // init express aplication
 const serverPort = 4000;
 server.listen(serverPort, () => {
@@ -17,29 +17,32 @@ server.listen(serverPort, () => {
 server.get('/movies', (req, res) => {
   console.log(req);
   console.log(res);
-  res.json(movies);
+  res.json({ succes: true, movies: movies });
+});
+server.get('/movies/:movieId', (req, res) => {
+  const paramsId = req.params.movieId;
+  const foundMovie = movies.find(
+    (movie) => parseInt(movie.id) === parseInt(paramsId)
+  );
+  res.render('movie', foundMovie);
 });
 
-
-server.post('/login', (req, res) =>{
-
-const userFinded = users.find((user) =>{
-  if(req.body.email === user.email){
-    const responseSuccess= {
-      success: true,
-      userId: "id_de_la_usuaria_encontrada",
+server.post('/login', (req, res) => {
+  const userFinded = users.find((user) => {
+    if (req.body.email === user.email) {
+      const responseSuccess = {
+        success: true,
+        userId: 'id_de_la_usuaria_encontrada',
+      };
+      res.json(responseSuccess);
+    } else {
+      const responseFalse = {
+        success: false,
+        errorMessage: 'Usuaria/o no encontrada/o',
+      };
+      res.json(responseFalse);
     }
-    res.json(responseSuccess);
-    } else{
-      const responseFalse = {success: false,
-  errorMessage: "Usuaria/o no encontrada/o"}
-  res.json(responseFalse);
-    }
-});
-
-
-
-
+  });
 });
 
 const staticServerPath = './src/public-react';
@@ -47,4 +50,3 @@ server.use(express.static(staticServerPath));
 
 const staticServerPathImage = './src/public-movies-images';
 server.use(express.static(staticServerPathImage));
-

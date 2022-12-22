@@ -45,10 +45,10 @@ Por favor marca a continuación los ejericios que hayais terminado:
 
   4.4 Express JS III:
 
-- [ ] 1. Obtener el id de la película a renderizar
-- [ ] 2. Obtener la película
-- [ ] 3. Renderiza una página cualquiera
-- [ ] 4. Renderiza la película
+- [x] 1. Obtener el id de la película a renderizar
+- [x] 2. Obtener la película
+- [x] 3. Renderiza una página cualquiera
+- [x] 4. Renderiza la película
 - [ ] 5. Añade estilos
 
   4.5 Bases de datos I:
