@@ -3,7 +3,6 @@
 // login
 
 const sendLoginToApi = data => {
-  console.log('Se están enviando datos al login:', data);
   // CAMBIA ESTE FETCH PARA QUE APUNTE A UN ENDPOINT DE TU SERVIDOR, PIENSA SI DEBE SER GET O POST, PIENSA QUÉ DATOS DEBES ENVIAR, ETC
   return fetch('http://localhost:4000/login', { 
   method: 'POST',
