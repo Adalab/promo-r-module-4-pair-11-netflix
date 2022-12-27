@@ -62,8 +62,8 @@ Por favor marca a continuación los ejericios que hayais terminado:
 
   4.6 Bases de datos I:
 
-- [ ] 1. Registro de nuevas usuarias en el front
-- [ ] 2. Registro de nuevas usuarias en el back
+- [x] 1. Registro de nuevas usuarias en el front
+- [x] 2. Registro de nuevas usuarias en el back
 - [ ] 3. Comprueba que no haya una usuaria registrada con el mismo email
 - [ ] 4. Actualiza el perfil de la usuaria en el front
 - [ ] 5. Cctualiza el perfil de la usuaria en el back

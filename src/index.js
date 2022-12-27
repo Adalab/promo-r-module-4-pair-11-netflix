@@ -4,7 +4,7 @@ const movies = require('./data/movies.json');
 const users = require('./data/users.json');
 const Database = require('better-sqlite3');
 
-const db = new Database('./src/data/movies.db', { verbose: console.log})
+const db = new Database('./src/data/netflix.db', { verbose: console.log})
 
 // create and config server
 const server = express();
@@ -53,6 +53,17 @@ res.json({success: true, movies: usersDb});
 //     }
   });
 
+  server.post('/sign-up', (req, res) =>{
+    const query = db.prepare('INSERT INTO users (email, password, name) VALUES (?,?,?)');
+    const result = query.run( req.body.email, req.body.password, 'maricarmen');
+    console.log(result);
+    res.json(
+      {
+        "success": true,
+        "userId": "nuevo-id-añadido"
+      });
+
+  });
 const staticServerPath = './src/public-react';
 server.use(express.static(staticServerPath));
 
