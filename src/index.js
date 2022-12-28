@@ -31,10 +31,26 @@ server.get('/movies/:movieId', (req, res) => {
 });
 
 server.post('/login', (req, res) => {
-  const query = db.prepare('SELECT * FROM users');
-const usersDb = query.all();
-console.log(usersDb);
-res.json({success: true, movies: usersDb});
+  console.log(req.body);
+  const query = db.prepare(
+    'SELECT * FROM users WHERE email = ? AND password = ?'
+  );
+  const userLogin = query.get(req.body.email, req.body.password);
+  if (userLogin) {
+    const response = {
+      success: true,
+      userId: userLogin.id,
+    };
+    res.json(response);
+  } else {
+    const response = {
+      success: false,
+      errorMessage: 'Usuaria/o no encontrada/o',
+    };
+    res.json(response);
+  }
+});
+
 //   const userFinded = users.find((user) => {
 // return req.body.email === user.email && req.body.password === user.password;
 //   });
@@ -45,13 +61,13 @@ res.json({success: true, movies: usersDb});
 //       };
 //       res.json(responseSuccess);
 //     } else {
-//       const responseFalse = {
-//         success: false,
-//         errorMessage: 'Usuaria/o no encontrada/o',
-//       };
-//       res.json(responseFalse);
+      // const responseFalse = {
+      //   success: false,
+      //   errorMessage: 'Usuaria/o no encontrada/o',
+      // };
+      // res.json(responseFalse);
 //     }
-  });
+//   });
 
   server.post('/sign-up', (req, res) =>{
     const query = db.prepare('INSERT INTO users (email, password, name) VALUES (?,?,?)');
@@ -64,6 +80,14 @@ res.json({success: true, movies: usersDb});
       });
 
   });
+
+server.get('/user/movies', (req, res) =>{
+  res.json(
+    {
+      "success": true,
+      "movies": []
+    });
+});
 const staticServerPath = './src/public-react';
 server.use(express.static(staticServerPath));
 
